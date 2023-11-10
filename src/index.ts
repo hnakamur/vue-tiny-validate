@@ -153,7 +153,11 @@ const useValidate = (
     }
   };
 
-  const test = async (entryData: ArgsObject, key: string, keyPath: string[]): Promise<void> => {
+  const test = async (
+    entryData: ArgsObject,
+    key: string,
+    keyPath: string[],
+  ): Promise<void> => {
     const { data, rules, dirt, rawData, entries } = entryData;
     const { lazy, firstError, touchOnTest } = option.value;
 
@@ -180,13 +184,12 @@ const useValidate = (
 
     for (const rule of ruleItem) {
       const { test, message = null, name } = rule;
-      let testValue: boolean | Promise<boolean> = test(
-        data()[key],
-        unwrap(_data),
-        unwrap(_rules),
-        unwrap(_option),
+      let testValue: boolean | Promise<boolean> = test(data()[key], {
+        data: unwrap(_data),
+        rules: unwrap(_rules),
+        option: unwrap(_option),
         keyPath,
-      );
+      });
 
       if (testValue instanceof Promise) {
         entries[key].$pending = true;

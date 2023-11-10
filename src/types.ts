@@ -27,16 +27,17 @@ export interface Option {
 
 export type Data = UnknownObject;
 
+export interface TestExtraArg {
+  data: Data;
+  rules: Rules;
+  option: Option;
+  keyPath: string[];
+}
+
 export interface Rule {
   test:
-    | ((value: any, data?: Data, rules?: Rules, option?: Option, keyPath?: string[]) => boolean)
-    | ((
-        value: any,
-        data?: Data,
-        rules?: Rules,
-        option?: Option,
-        keyPath?: string[],
-      ) => Promise<boolean>);
+    | ((value: any, extra?: TestExtraArg) => boolean)
+    | ((value: any, extra?: TestExtraArg) => Promise<boolean>);
   message?: string | ((value: any) => string);
   name: string;
 }
