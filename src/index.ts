@@ -182,10 +182,12 @@ const useValidate = (
       const { test, message = null, name } = rule;
       let testValue: boolean | Promise<boolean> = test(
         data()[key],
-        unwrap(_data),
-        unwrap(_rules),
-        unwrap(_option),
-        keyPath,
+        {
+          data: unwrap(_data),
+          rules: unwrap(_rules),
+          option: unwrap(_option),
+          keyPath,
+        }
       );
 
       if (testValue instanceof Promise) {
