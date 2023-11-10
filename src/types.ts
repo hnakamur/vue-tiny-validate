@@ -29,12 +29,13 @@ export type Data = UnknownObject;
 
 export interface Rule {
   test:
-    | ((value: any, data?: Data, rules?: Rules, option?: Option) => boolean)
+    | ((value: any, data?: Data, rules?: Rules, option?: Option, keyPath?: string[]) => boolean)
     | ((
         value: any,
         data?: Data,
         rules?: Rules,
         option?: Option,
+        keyPath?: string[],
       ) => Promise<boolean>);
   message?: string | ((value: any) => string);
   name: string;
