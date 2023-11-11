@@ -4,6 +4,13 @@ export type UnknownObject = Record<string, any>;
 
 export type Fns = Record<string, Array<Function>>;
 
+export interface TestExtraArg {
+  data: Data;
+  rules: Rules;
+  option: Option;
+  keyPath: string[];
+}
+
 export interface Option {
   autoTouch?: boolean;
   autoTest?: boolean;
@@ -11,28 +18,11 @@ export interface Option {
   firstError?: boolean;
   touchOnTest?: boolean;
   transform?:
-    | ((
-        value: any,
-        data?: Data,
-        rules?: Rules,
-        option?: Option,
-      ) => Result | any)
-    | ((
-        value: any,
-        data?: Data,
-        rules?: Rules,
-        option?: Option,
-      ) => Promise<Result | any>);
+    | ((value: any, extra?: TestExtraArg) => Result | any)
+    | ((value: any, extra?: TestExtraArg) => Promise<Result | any>);
 }
 
 export type Data = UnknownObject;
-
-export interface TestExtraArg {
-  data: Data;
-  rules: Rules;
-  option: Option;
-  keyPath: string[];
-}
 
 export interface Rule {
   test:

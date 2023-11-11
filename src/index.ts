@@ -38,7 +38,7 @@ const useValidate = (
   const option = computed<Option>(() => ({ ...OPTION, ...unwrap(_option) }));
 
   const result = computed<Result | any>(() => {
-    const rawResult: Result = getResult(entries, dirt);
+    const rawResult: Result = getResult(entries, dirt, []);
     const { transform } = option.value;
 
     return transform
@@ -46,7 +46,7 @@ const useValidate = (
       : rawResult;
   });
 
-  const getResult = (entries: Entries, dirt: Dirt): Result => {
+  const getResult = (entries: Entries, dirt: Dirt, keyPath: string[]): Result => {
     const result: Result = {
       ...ENTRY_PARAM,
       $dirty: false,
@@ -80,6 +80,7 @@ const useValidate = (
         const childResult = getResult(
           entries[key] as Entries,
           dirt[key] as Dirt,
+          [...keyPath, key],
         );
         result[key] = { ...childResult };
         setOverallResult(result, childResult);
