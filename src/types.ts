@@ -55,6 +55,7 @@ export type FnsMap = Array<FnsMapItem>;
 export interface Error {
   name: string;
   message?: string | null;
+  keyPath: string[];
 }
 
 export interface Entry {

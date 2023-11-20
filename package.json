@@ -127,5 +127,9 @@
       "import/export": "off",
       "antfu/if-newline": "off"
     }
+  },
+  "volta": {
+    "node": "20.9.0",
+    "yarn": "4.0.2"
   }
 }

@@ -26,8 +26,8 @@ describe('rules', () => {
       ...baseState,
       $invalid: true,
       $errors: [
-        { name: 'in20th', message: null },
-        { name: 'odd', message: null },
+        { name: 'in20th', message: null, keyPath: ['year'] },
+        { name: 'odd', message: null, keyPath: ['year'] },
       ],
     });
   });
@@ -65,7 +65,7 @@ describe('rules', () => {
       valueExpect(result.value.year, {
         ...baseState,
         $invalid: true,
-        $errors: [{ name: 'in20th', message: null }],
+        $errors: [{ name: 'in20th', message: null, keyPath: ['year'] }],
       });
     });
 
@@ -90,7 +90,7 @@ describe('rules', () => {
       valueExpect(result.value.year, {
         ...baseState,
         $invalid: true,
-        $errors: [{ name: 'in20th', message: null }],
+        $errors: [{ name: 'in20th', message: null, keyPath: ['year'] }],
       });
     });
 
@@ -119,7 +119,7 @@ describe('rules', () => {
     valueExpect(result.value.zip, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'zip', message: null }],
+      $errors: [{ name: 'zip', message: null, keyPath: ['zip'] }],
     });
   });
 
@@ -139,7 +139,7 @@ describe('rules', () => {
     valueExpect(result.value.rePassword, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'same', message: null }],
+      $errors: [{ name: 'same', message: null, keyPath: ['rePassword'] }],
     });
   });
 
@@ -160,7 +160,9 @@ describe('rules', () => {
     valueExpect(result.value.year, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'in20th', message: 'Should be in the 20th' }],
+      $errors: [
+        { name: 'in20th', message: 'Should be in the 20th', keyPath: ['year'] },
+      ],
       $messages: ['Should be in the 20th'],
     });
   });
@@ -182,7 +184,13 @@ describe('rules', () => {
     valueExpect(result.value.year, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'in20th', message: '2020 is not in the 20th' }],
+      $errors: [
+        {
+          name: 'in20th',
+          message: '2020 is not in the 20th',
+          keyPath: ['year'],
+        },
+      ],
       $messages: ['2020 is not in the 20th'],
     });
   });
@@ -211,6 +219,7 @@ describe('rules', () => {
         {
           name: 'in20th',
           message: '2020 is not in the 20th. Try another year.',
+          keyPath: ['year'],
         },
       ],
       $messages: ['2020 is not in the 20th. Try another year.'],

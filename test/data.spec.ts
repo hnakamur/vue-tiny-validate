@@ -18,7 +18,7 @@ describe('data', () => {
     valueExpect(result.value.name, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'required', message: null }],
+      $errors: [{ name: 'required', message: null, keyPath: ['name'] }],
     });
 
     data.value = { name: 'Anh Le' };
@@ -45,7 +45,7 @@ describe('data', () => {
     valueExpect(result.value.age, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'positive', message: null }],
+      $errors: [{ name: 'positive', message: null, keyPath: ['age'] }],
     });
 
     data.age = 25;
@@ -74,7 +74,7 @@ describe('data', () => {
     valueExpect(result.value.agree, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'isNotFalse', message: null }],
+      $errors: [{ name: 'isNotFalse', message: null, keyPath: ['agree'] }],
     });
 
     origin.value = true;
@@ -105,21 +105,21 @@ describe('data', () => {
       ...baseState,
       $invalid: true,
       $errors: [
-        { name: 'required', message: null },
-        { name: 'positive', message: null },
+        { name: 'required', message: null, keyPath: ['name'] },
+        { name: 'positive', message: null, keyPath: ['age'] },
       ],
     });
 
     valueExpect(result.value.name, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'required', message: null }],
+      $errors: [{ name: 'required', message: null, keyPath: ['name'] }],
     });
 
     valueExpect(result.value.age, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'positive', message: null }],
+      $errors: [{ name: 'positive', message: null, keyPath: ['age'] }],
     });
 
     data.name = 'Anh Le';
@@ -159,7 +159,7 @@ describe('data', () => {
     valueExpect(result.value.info.age, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'positive', message: null }],
+      $errors: [{ name: 'positive', message: null, keyPath: ['info', 'age'] }],
     });
 
     data.info.age = 25;

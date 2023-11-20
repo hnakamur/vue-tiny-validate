@@ -105,6 +105,7 @@ const useValidate = (
     dirt: Dirt,
     rawData: UnknownObject,
     entries: Entries,
+    keyPath: string[],
   ): void => {
     const keys: Array<string> = Object.keys(rules);
 
@@ -124,6 +125,7 @@ const useValidate = (
           dirt[key] as Dirt,
           rawData[key],
           entries[key] as Entries,
+          [...keyPath, key],
         );
       } else {
         setReactiveValue(dirt, key, false);
@@ -134,7 +136,7 @@ const useValidate = (
         setReactiveValue(entries, key, {
           ...ENTRY_PARAM,
           $reset: () => reset(entryData, key),
-          $test: async () => await test(entryData, key),
+          $test: async () => await test(entryData, key, keyPath),
           $touch: () => touch(entryData, key),
         });
 
@@ -151,7 +153,11 @@ const useValidate = (
     }
   };
 
-  const test = async (entryData: ArgsObject, key: string): Promise<void> => {
+  const test = async (
+    entryData: ArgsObject,
+    key: string,
+    keyPath: string[],
+  ): Promise<void> => {
     const { data, rules, dirt, rawData, entries } = entryData;
     const { lazy, firstError, touchOnTest } = option.value;
 
@@ -203,7 +209,11 @@ const useValidate = (
             ? message(data()[key])
             : (message as string);
 
-        $errors.push({ name, message: testMessage });
+        $errors.push({
+          name,
+          message: testMessage,
+          keyPath: [...keyPath, key],
+        });
 
         if (testMessage) $messages.push(testMessage);
 
@@ -247,6 +257,7 @@ const useValidate = (
       dirt,
       rawData,
       entries,
+      [],
     );
   };
 

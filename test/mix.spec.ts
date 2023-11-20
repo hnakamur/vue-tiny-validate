@@ -18,7 +18,7 @@ describe('data and rules', () => {
     valueExpect(result.value.country, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'required', message: null }],
+      $errors: [{ name: 'required', message: null, keyPath: ['country'] }],
     });
 
     data.value.country = 'Vietnam';
@@ -45,7 +45,7 @@ describe('data and rules', () => {
     valueExpect(result.value.country, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'required', message: null }],
+      $errors: [{ name: 'required', message: null, keyPath: ['country'] }],
     });
 
     data.country = 'Vietnam';
@@ -74,7 +74,7 @@ describe('data and rules', () => {
     valueExpect(result.value.country, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'required', message: null }],
+      $errors: [{ name: 'required', message: null, keyPath: ['country'] }],
     });
 
     origin.value = 'Vietnam';

@@ -29,7 +29,9 @@ describe('method', () => {
     valueExpect(result.value, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'ageRequired', message: 'Age is required' }],
+      $errors: [
+        { name: 'ageRequired', message: 'Age is required', keyPath: ['age'] },
+      ],
       $messages: ['Age is required'],
     });
 
@@ -39,8 +41,12 @@ describe('method', () => {
       ...baseState,
       $invalid: true,
       $errors: [
-        { name: 'nameRequired', message: 'Name is required' },
-        { name: 'ageRequired', message: 'Age is required' },
+        {
+          name: 'nameRequired',
+          message: 'Name is required',
+          keyPath: ['name'],
+        },
+        { name: 'ageRequired', message: 'Age is required', keyPath: ['age'] },
       ],
       $messages: ['Name is required', 'Age is required'],
     });

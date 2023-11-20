@@ -24,7 +24,7 @@ describe('option', () => {
     valueExpect(result.value, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'blank', message: null }],
+      $errors: [{ name: 'blank', message: null, keyPath: ['city'] }],
       $dirty: true,
     });
   });
@@ -88,7 +88,7 @@ describe('option', () => {
     valueExpect(result.value, {
       ...baseState,
       $invalid: true,
-      $errors: [{ name: 'notBlank', message: null }],
+      $errors: [{ name: 'notBlank', message: null, keyPath: ['city'] }],
     });
   });
 
